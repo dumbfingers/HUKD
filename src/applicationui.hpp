@@ -1,8 +1,8 @@
 #ifndef ApplicationUI_HPP_
 #define ApplicationUI_HPP_
 
-#include <QObject>
 #include <bb/cascades/GroupDataModel>
+#include <QtCore/QObject>
 
 namespace bb
 {
@@ -24,6 +24,12 @@ class QTranslator;
 class ApplicationUI : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged)
+    Q_PROPERTY(bool error READ error NOTIFY statusChanged)
+    Q_PROPERTY(QString errorMessage READ errorMessage NOTIFY statusChanged)
+
+    Q_PROPERTY(bb::cascades::DataModel* model READ model CONSTANT)
+
 public:
     ApplicationUI(bb::cascades::Application *app);
     virtual ~ApplicationUI() { }

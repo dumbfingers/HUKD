@@ -10,9 +10,12 @@
 
 #include <QtCore/QObject>
 
-class DealRequest {
+class DealRequest : public QObject
+{
+	Q_OBJECT
+
 public:
-	DealRequest();
+	DealRequest(QObject *parent = 0);
 	virtual ~DealRequest();
 
     /*

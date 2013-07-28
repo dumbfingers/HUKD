@@ -9,6 +9,7 @@
 #include <bb/data/JsonDataAccess>
 
 using namespace bb::cascades;
+using namespace bb::data;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
         QObject(app)
