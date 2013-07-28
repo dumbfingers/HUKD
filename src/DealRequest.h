@@ -9,17 +9,31 @@
 #define DEALREQUEST_H_
 
 #include <QtCore/QObject>
-#include <bb/cascades/GroupDataModel>
 
 class DealRequest {
 public:
 	DealRequest();
 	virtual ~DealRequest();
-public Q_SLOTS:
+
+    /*
+     * Makes a network call to retrieve the twitter feed for the specified screen name
+     * @param screenName - the screen name of the feed to extract
+     * @see onTimelineReply
+     */
+    void requestDeal();
+Q_SIGNALS:
 	/*
-	 * Called by the QML to get deals list
+	 * This signal is emitted when the twitter request is received
+	 * @param info - on success, this is the json reply from the request
+	 *               on failure, it is an error string
+	 * @param success - true if twitter request succeed, false if not
 	 */
-	void requestDeals();
+	void complete(const QString &info, bool success);
+private Q_SLOTS:
+	/*
+	 * Callback handler for QNetworkReply finished() signal
+	 */
+	void onDealReply();
 };
 
 #endif /* DEALREQUEST_H_ */
