@@ -1,5 +1,7 @@
 #include "applicationui.hpp"
-#include "DealRequest.h"
+#include "DealRetriever.hpp"
+#include "NetworkManager.hpp"
+#include "DealDataModel.hpp"
 
 #include <bb/cascades/Application>
 #include <bb/cascades/QmlDocument>
@@ -26,6 +28,10 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     // initial load
     onSystemLanguageChanged();
 
+    // Initialize helper objects
+    NetworkManager *networkManager = NetworkManager::getInstance();
+    this->_dealRetriever = new DealRetriever(this);
+    this->_dataModel = new DealDataModel(this);
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
@@ -51,6 +57,6 @@ void ApplicationUI::onSystemLanguageChanged()
 void ApplicationUI::reset()
 {
 
-    emit statusChanged();
+//    emit statusChanged();
 }
 

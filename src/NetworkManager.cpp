@@ -51,10 +51,10 @@ void NetworkManager::onNetworkRequestFinished(QNetworkReply* reply) {
 	QNetworkReply::NetworkError error = reply->error();
 	if(error != QNetworkReply::NoError) {
 		qDebug() << "Networking Request Error ( " << url << ") due to " << error;
-		emit networkResponseFailed(url, error);
+		emit networkResponseFailed(error);
 	} else {
 		QString response = QString(reply->readAll());
-		emit networkResponse(url, response);
+		emit networkResponse(response);
 	}
 	reply->deleteLater();
 }

@@ -11,7 +11,9 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkSession>
 #include <QtNetwork/QNetworkConfigurationManager>
+#include <QtNetwork/QNetworkReply>
 #include <QtCore/QObject>
+#include <QUrl>
 
 class NetworkManager : public QObject {
 	Q_OBJECT
@@ -23,8 +25,8 @@ public:
 
 	void get(QString urlString, QVariantMap urlParams);
 signals:
-	void networkResponse(QUrl url, QString response);
-	void networkResponseFailed(QUrl url, int error);
+	void networkResponse(QString response);
+	void networkResponseFailed(int error);
 	void networkStatusChanged(bool activeConnection);
 public slots:
 	void onNetworkStateChanged(QNetworkSession::State state);

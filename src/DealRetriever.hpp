@@ -23,12 +23,12 @@ signals:
 	void dealUpdated(QVariantMap dealInfo);
 	void dealUpdateFailed();
 private slots:
-	void onNetworkResponse(QUrl url, QString response);
-	void onNetworkResponseFailed(QUrl url, int error);
+	void onNetworkResponse(QString response);
+	void onNetworkResponseFailed(int error);
 
 private:
 	void parseDealUpdateResponse(QString response);
-
+	void fetchDeals(QString apiKey);
 };
 
 #endif /* DEALRETRIEVER_HPP_ */

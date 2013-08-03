@@ -3,16 +3,17 @@
 
 #include <QtCore/QObject>
 
-namespace bb
-{
-    namespace cascades
-    {
-        class Application;
-        class LocaleHandler;
-    }
+namespace bb {
+namespace cascades {
+class Application;
+class LocaleHandler;
+}
 }
 
 class QTranslator;
+
+class DealDataModel;
+class DealRetriever;
 
 /*!
  * @brief Application object
@@ -20,32 +21,41 @@ class QTranslator;
  *
  */
 
-class ApplicationUI : public QObject
-{
-    Q_OBJECT
+class ApplicationUI: public QObject {
+Q_OBJECT
 
 public:
-    ApplicationUI(bb::cascades::Application *app);
-    virtual ~ApplicationUI() { }
+	ApplicationUI(bb::cascades::Application *app);
+	virtual ~ApplicationUI() {
+	}
+
+	Q_PROPERTY(DealDataModel *dataModel READ dataModel CONSTANT)
+	;
+
+	DealDataModel *dataModel();Q_INVOKABLE
+	void updateDataModel(bool silent = false);
 
 public Q_SLOTS:
 
-    /*
-     * Allows the QML to reset the state of the application
-     */
-    void reset();
+	/*
+	 * Allows the QML to reset the state of the application
+	 */
+	void reset();
 
-Q_SIGNALS:
-
-private Q_SLOTS:
-
+signals:
+	void networkChanged();
 
 private slots:
-    void onSystemLanguageChanged();
+	void onSystemLanguageChanged();
+
+	void onNetworkStatusChanged(bool connected);
 
 private:
-    QTranslator* m_pTranslator;
-    bb::cascades::LocaleHandler* m_pLocaleHandler;
+	QTranslator* m_pTranslator;
+	bb::cascades::LocaleHandler* m_pLocaleHandler;
+
+	DealDataModel *_dataModel;
+	DealRetriever *_dealRetriever;
 };
 
 #endif /* ApplicationUI_HPP_ */
