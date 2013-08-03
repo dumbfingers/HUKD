@@ -3,31 +3,43 @@ BASEDIR =  $$quote($$_PRO_FILE_PWD_)
 
 device {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/DealRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/DealDataModel.cpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.cpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/DealRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/DealDataModel.hpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.hpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.hpp) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 
     CONFIG(release, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/DealRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/DealDataModel.cpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.cpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/DealRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/DealDataModel.hpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.hpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.hpp) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }
 
 simulator {
     CONFIG(debug, debug|release) {
-        SOURCES +=  $$quote($$BASEDIR/src/DealRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/DealDataModel.cpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.cpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/DealRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/DealDataModel.hpp) \
+                 $$quote($$BASEDIR/src/DealRetriever.hpp) \
+                 $$quote($$BASEDIR/src/NetworkManager.hpp) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }

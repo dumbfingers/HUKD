@@ -13,11 +13,7 @@ using namespace bb::data;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
         QObject(app)
-, m_active(false)
-, m_error(false)
-, m_model(new GroupDataModel(QStringList() << "title", this))
 {
-	m_model->setGrouping(ItemGrouping::None);
 
     // prepare the localization
     m_pTranslator = new QTranslator(this);
@@ -54,77 +50,7 @@ void ApplicationUI::onSystemLanguageChanged()
 
 void ApplicationUI::reset()
 {
-    m_error = false;
-    m_errorMessage.clear();
 
     emit statusChanged();
 }
 
-void ApplicationUI::requestDeals()
-{
-	if (m_active)
-		return;
-	DealRequest* request = new DealRequest(this);
-	connect(request, SIGNAL(complete(QString, bool)), this, SLOT(onDeal(QString, bool)));
-
-	request->requestDeal();
-	m_active = true;
-	emit activeChanged();
-}
-
-void ApplicationUI::onDeal(const QString &info, bool success)
-{
-	DealRequest* request = qobject_cast<DealRequest*>(sender());
-
-	if (success) {
-		parseResponse(info);
-
-		emit dealsLoaded();
-	} else {
-		m_errorMessage = info;
-		m_error = true;
-		emit statusChanged();
-	}
-
-	m_active = false;
-	emit activeChanged();
-
-	request->deleteLater();
-}
-
-void ApplicationUI::parseResponse(const QString &response)
-{
-	m_model->clear();
-
-	if (response.trimmed().isEmpty())
-		return;
-
-	JsonDataAccess dataAccess;
-	const QVariant variant = dataAccess.loadFromBuffer(response);
-
-	const QVariantList feed = variant.toList();
-
-	foreach (const QVariant &deal, feed) {
-		m_model->insert(deal.toMap());
-	}
-}
-
-bool ApplicationUI::active() const
-{
-    return m_active;
-}
-
-bool ApplicationUI::error() const
-{
-    return m_error;
-}
-
-QString ApplicationUI::errorMessage() const
-{
-    return m_errorMessage;
-}
-
-bb::cascades::DataModel* ApplicationUI::model() const
-{
-    return m_model;
-}

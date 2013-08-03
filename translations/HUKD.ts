@@ -4,12 +4,12 @@
 <context>
     <name>DealRequest</name>
     <message>
-        <location filename="../src/DealRequest.cpp" line="66"/>
+        <location filename="../src/DealRequest.cpp" line="69"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DealRequest.cpp" line="73"/>
+        <location filename="../src/DealRequest.cpp" line="76"/>
         <source>Twitter request failed. Check internet connection</source>
         <translation type="unfinished"></translation>
     </message>
