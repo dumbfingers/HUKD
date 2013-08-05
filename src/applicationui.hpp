@@ -29,11 +29,11 @@ public:
 	virtual ~ApplicationUI() {
 	}
 
-	Q_PROPERTY(DealDataModel *dataModel READ dataModel CONSTANT)
-	;
+	Q_PROPERTY(DealDataModel *dataModel READ dataModel CONSTANT);
 
-	DealDataModel *dataModel();Q_INVOKABLE
-	void updateDataModel(bool silent = false);
+	DealDataModel *dataModel();
+
+	Q_INVOKABLE	void updateDataModel(bool silent = false);
 
 public Q_SLOTS:
 
@@ -49,6 +49,11 @@ private slots:
 	void onSystemLanguageChanged();
 
 	void onNetworkStatusChanged(bool connected);
+	void onDealUpdated();
+	void onDealUpdateError();
+
+private:
+	void handleDealUpdated();
 
 private:
 	QTranslator* m_pTranslator;

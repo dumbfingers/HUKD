@@ -12,15 +12,19 @@
 #include <bb/cascades/DataModel>
 #include <bb/cascades/ArrayDataModel>
 
-class DealDataModel {
+class DealDataModel : public bb::cascades::DataModel {
 public:
-	DealDataModel();
+	DealDataModel(QObject *parent = 0);
 	virtual ~DealDataModel();
 
 //	Q_INVOKABLE virtual QString itemType(const QVariantList &indexPath);
-	Q_INVOKABLE virtual QVariant data(const QVariantList &indexPath);
+//	Q_INVOKABLE virtual QVariant data(const QVariantList &indexPath);
 
 //	Q_INVOKABLE virtual void removeItems(const QVariantList &indexPath);
+
+public slots:
+	void onDealUpdated();
+	void onDealUpdateError();
 };
 
 #endif /* DEALDATAMODEL_HPP_ */

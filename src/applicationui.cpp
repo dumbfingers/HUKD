@@ -32,6 +32,13 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     NetworkManager *networkManager = NetworkManager::getInstance();
     this->_dealRetriever = new DealRetriever(this);
     this->_dataModel = new DealDataModel(this);
+
+    connect(this->_dealRetriever, SIGNAL(dealUpdated(QVariantMap)), this, SLOT(onDealUpdated()));
+    connect(this->_dealRetriever, SIGNAL(dealUpdated(QVariantMap)), this->_dataModel, SLOT(onDealUpdated()));
+
+    connect(this->_dealRetriever, SIGNAL(dealUpdateFailed()), this, SLOT(onDealUpdateError()));
+
+
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
@@ -41,6 +48,14 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     // Set created root object as the application scene
     app->setScene(root);
+}
+
+DealDataModel *ApplicationUI::dataModel() {
+	return this->_dataModel;
+}
+
+void ApplicationUI::updateDataModel(bool silent) {
+
 }
 
 void ApplicationUI::onSystemLanguageChanged()
@@ -54,6 +69,13 @@ void ApplicationUI::onSystemLanguageChanged()
     }
 }
 
+void ApplicationUI::onDealUpdated() {
+	this->handleDealUpdated();
+}
+
+void ApplicationUI::handleDealUpdated() {
+
+}
 void ApplicationUI::reset()
 {
 
